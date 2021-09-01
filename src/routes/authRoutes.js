@@ -6,7 +6,7 @@ var router = express.Router();
 
 // rutas login users
 
-router.get('/login', authController.login);
+router.post('/login', authController.login);
 
 router.get('/register', authController.register);
 

@@ -1,3 +1,4 @@
+
 const controller = {
 
     list: function ( req, res ) {
@@ -35,6 +36,8 @@ const controller = {
         };
 
         // list all characters
+
+        // console.log( req.userData.user );
 
         res.json( {"Response":"listado de actores"} );
 

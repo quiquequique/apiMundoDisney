@@ -1,0 +1,12 @@
+
+###
+// postea a ruta login y recibe el token
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+
+###
+// ruta a list de actores
+GET http://localhost:3000/characters
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjozMywiZW1haWwiOiJlYWJyYW16b25AZ21haWwuY29tIiwibmFtZSI6IlF1aXF1ZSJ9LCJpYXQiOjE2MzA0NTc5MzQsImV4cCI6MTYzMTMyMTkzNH0.NAmF0ZoZg_XEH_-a7kGKBsEPs43WEeZdjEdCewiwP_k
