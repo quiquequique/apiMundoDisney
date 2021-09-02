@@ -4,7 +4,7 @@ require('dotenv').config();
 
 
 
-module.exports = ( req, res, next ) => {
+module.exports =( req, res, next ) => {
 
     const bearerHeader = req.headers['authorization'];
 
@@ -14,9 +14,9 @@ module.exports = ( req, res, next ) => {
 
         const token = bearer[1];
 
-        const salt = process.env.JWT_SALT;
+        const salt = process.env.JWT_KEY;
 
-        jwt.verify( token, `${salt}`, ( error, data )=> {
+        jwt.verify( token, `${salt}`, ( error, data ) => {
 
             if( !error ){
 

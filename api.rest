@@ -1,12 +1,31 @@
 
 ###
+// registra usuario
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+    "name":"Enrique",
+    "lastName":"Abramzon",
+    "email":"eabramzon@gmail.com",
+    "password":"1234"
+}
+
+###
 // postea a ruta login y recibe el token
 POST http://localhost:3000/auth/login
 Content-Type: application/json
 
+{
+    "email":"eabramzon@gmail.com",
+    "password":"1234"
+}
+
 
 ###
-// ruta a list de actores
+// ruta a list de actores con el token recibido
 GET http://localhost:3000/characters
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjozMywiZW1haWwiOiJlYWJyYW16b25AZ21haWwuY29tIiwibmFtZSI6IlF1aXF1ZSJ9LCJpYXQiOjE2MzA0NTc5MzQsImV4cCI6MTYzMTMyMTkzNH0.NAmF0ZoZg_XEH_-a7kGKBsEPs43WEeZdjEdCewiwP_k
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxMCwibmFtZSI6IkVucmlxdWUiLCJsYXN0TmFtZSI6IkFicmFtem9uIiwiZW1haWwiOiJlYWJyYW16b25AZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmEkMTAkUWV1L2hRY2xocWtzNUlDRWRkMlFpdXJ6ZExTcjlQZ05wa1lUTWwwWC5nNnhoLzg2eU84MGkiLCJjcmVhdGVkQXQiOiIyMDIxLTA5LTAyVDAwOjIyOjI1LjAwMFoiLCJ1cGRhdGVkQXQiOiIyMDIxLTA5LTAyVDAwOjIyOjI1LjAwMFoifSwiaWF0IjoxNjMwNTQzMzQxLCJleHAiOjE2MzE0MDczNDF9.6TyD3CyeMOcyvZ-_BkY-XL7tamVki_0hNwHlKD7VlB4
+
+

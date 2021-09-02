@@ -1,4 +1,7 @@
 const jwt = require("jsonwebtoken");
+const bcrypt = require('bcryptjs');
+const { validationResult } = require('express-validator');
+const { User } = require('../../db');
 
 require('dotenv').config();
 
@@ -6,27 +9,74 @@ require('dotenv').config();
 
 const controller = {
 
-    login: function (req, res ) {
+    login: async (req, res ) => {
 
-        const user = {
-            id: 33,
-            email: 'eabramzon@gmail.com',
-            name: 'Quique'
-        };
+        let errors = validationResult(req);
 
-        const salt = process.env.JWT_SALT;
+        if(!errors.isEmpty()){
 
-        const token = jwt.sign( {user}, `${salt}`, { expiresIn: '240h'} );
+            return res.status(422).json({errors: errors.array()});
+        }
 
-        res.json({"Response":"ruta del login devuelve token", "token": token} );
+        try{
+
+            const user = await User.findOne( { where:{ email: req.body.email } } );
+
+            // console.log(user);
+
+            if( user ){
+
+                const passwordCompare = bcrypt.compareSync( req.body.password, user.password );
+
+                if( passwordCompare ){
+
+                    const jwtKey = process.env.JWT_KEY;
+
+                    const token = jwt.sign( {user}, `${jwtKey}`, { expiresIn: '240h'} );
+
+                    res.status(200).json( {"token": token} );
+
+                }
+
+            }else{
+
+                res.status(401).json( {error: `user or password are incorrect`} );
+            }
+
+        }
+        catch(error){
+
+            res.status(401).json( {error: `user or password are incorrect: ${error}`} );
+        }
 
     },
 
-    register: function (req, res ) {
+    register: async ( req, res ) => {
 
-        res.json({"Response":"ruta de registrarse"});
+        let errors = validationResult(req);
 
-    }
+        if(!errors.isEmpty()){
+
+            return res.status(422).json({errors: errors.array()});
+        }
+
+        try{
+
+            const passToEncript = req.body.password;
+
+            req.body.password = bcrypt.hashSync( passToEncript, 10 );
+
+            const newUser = await User.create( req.body );
+
+            return res.status( 200 ).json({msg:'user created'});
+
+        }catch( error ){
+
+            return res.status( 500 ).json( {error: true} );
+
+        }
+    },
+
 
 
 }

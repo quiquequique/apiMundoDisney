@@ -1,14 +1,16 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
-var indexRouter = require('./src/routes/indexRoutes');
-var authRouter = require('./src/routes/authRoutes');
-var characterRouter = require('./src/routes/characterRoutes');
-var movieRouter = require('./src/routes/movieRoutes');
+const indexRouter = require('./src/routes/indexRoutes');
+const authRouter = require('./src/routes/authRoutes');
+const characterRouter = require('./src/routes/characterRoutes');
+const movieRouter = require('./src/routes/movieRoutes');
 
-var app = express();
+const app = express();
+
+require('./db');
 
 app.use(logger('dev'));
 app.use(express.json());
