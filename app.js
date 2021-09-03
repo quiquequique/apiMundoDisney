@@ -10,7 +10,7 @@ const movieRouter = require('./src/routes/movieRoutes');
 
 const app = express();
 
-require('./db');
+// const db = require('./db');
 
 app.use(logger('dev'));
 app.use(express.json());
