@@ -3,7 +3,7 @@
 
 module.exports = ( sequelize, type ) => {
 
-    return sequelize.define( 'user', {
+    const User =  sequelize.define( 'user', {
         id:{
             type: type.INTEGER,
             primaryKey: true,
@@ -13,5 +13,10 @@ module.exports = ( sequelize, type ) => {
         lastName: type.STRING,
         email: type.STRING,
         password: type.STRING
-    } )
+    },
+    {}
+    );
+
+    return User;
+
 }

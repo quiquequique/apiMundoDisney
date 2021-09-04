@@ -1,10 +1,10 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require('bcryptjs');
 const { validationResult } = require('express-validator');
-const { User } = require('../../db');
+// const user  = require('../../db/models/user');
+const db = require('../../db/models/index')
 
 require('dotenv').config();
-
 
 
 const controller = {
@@ -20,7 +20,7 @@ const controller = {
 
         try{
 
-            const user = await User.findOne( { where:{ email: req.body.email } } );
+            const user = await db.user.findOne( { where:{ email: req.body.email } } );
 
             // console.log(user);
 
@@ -66,13 +66,26 @@ const controller = {
 
             req.body.password = bcrypt.hashSync( passToEncript, 10 );
 
-            const newUser = await User.create( req.body );
+            // console.log( req.body );
+
+            const newUser = await db.user.create( req.body );
+
+            if( newUser ){
+
+                return res.json({
+                    status: "ok",
+                    message: `se creo el user ${req.body.name} correctamente`
+                })
+            }else{
+    
+                return error;
+            }
 
             return res.status( 200 ).json({msg:'user created'});
 
         }catch( error ){
 
-            return res.status( 500 ).json( {error: true} );
+            return res.status( 500 ).json( {error: `${error}`} );
 
         }
     },

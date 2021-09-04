@@ -1,4 +1,5 @@
-const { Movies } = require( '../../db')
+//const { movie, genre } = require( '../../db/models')
+const db = require ('../../db/models')
 
 const controller = {
 
@@ -38,32 +39,39 @@ const controller = {
         // list all movies
         try{
 
-            const returnedMovies = await Movies.findAll();
+            const returnedMovies = await db.movie.findAll();
 
-            return res.status( 200 ).json( {
+            if( returnedMovies ){
 
-                meta:{
+                return res.status( 200 ).json( {
 
-                    status: 200,
-                    count: returnedMovies.length,
-                    link:'/movies'
+                    meta:{
 
-                },
-                data: returnedMovies.map( ( movie ) => {
+                        status: 200,
+                        count: returnedMovies.length,
+                        link:'/movies'
 
-                    return {
+                    },
+                    data: returnedMovies.map( ( movie ) => {
 
-                        image: movie.image,
-                        title: movie.title,
-                        createdAt: movie.createdAt
+                        return {
 
-                    }
-                })
-            } );
+                            image: movie.image,
+                            title: movie.title,
+                            createdAt: movie.createdAt
+
+                        }
+                    })
+                } );
+            }else{
+
+                return error;
+            }
+
 
         }catch(error){
 
-            return res.status(500).json( {error: true} );
+            return res.status(500).json( {error: true, msg: `${error}`} );
         }
     },
 
@@ -75,7 +83,7 @@ const controller = {
 
             const movieId = req.params.id;
 
-            const returnedOne = await Movies.findByPk( movieId, { include: "genre" } );
+            const returnedOne = await db.movie.findByPk ( movieId, {include:["genre"]});
 
             if( !returnedOne ){
 
@@ -100,9 +108,9 @@ const controller = {
 
             const movieToCreate = req.body;
 
-            console.log( movieToCreate );
+            // console.log( movieToCreate );
 
-            const createdMovie = await Movies.create( movieToCreate );
+            const createdMovie = await db.movie.create( movieToCreate );
 
             if( createdMovie ){
 

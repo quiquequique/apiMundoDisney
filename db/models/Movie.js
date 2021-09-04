@@ -2,11 +2,12 @@
 
 module.exports = ( sequelize, type ) => {
 
-    const Movie = sequelize.define( 'Movie', {
+    const Movie = sequelize.define( 'movie', {
 
         title: type.STRING,
         image: type.STRING,
-        stars: type.INTEGER(1)
+        stars: type.INTEGER(1),
+        //genreId:{ type: type.INTEGER, foreignKey: true }
 
     },{} );
     // asociations
@@ -14,7 +15,7 @@ module.exports = ( sequelize, type ) => {
 
         Movie.belongsTo( models.Genre,{
             as:'genre',
-            foreignKey: 'genre_id'
+            foreignKey: 'genreId'
         });
     }
 

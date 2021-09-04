@@ -1,3 +1,4 @@
+/*
 const { Sequelize } = require('sequelize');
 
 require('dotenv').config();
@@ -47,3 +48,4 @@ sequelize.sync( {force: false} ).then( () => {
 });
 
 module.exports = { User, Movies, Genre };
+*/

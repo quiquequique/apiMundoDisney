@@ -7,6 +7,7 @@ const indexRouter = require('./src/routes/indexRoutes');
 const authRouter = require('./src/routes/authRoutes');
 const characterRouter = require('./src/routes/characterRoutes');
 const movieRouter = require('./src/routes/movieRoutes');
+const genreRouter = require('./src/routes/genreRoutes');
 
 const app = express();
 
@@ -22,5 +23,6 @@ app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/characters', characterRouter);
 app.use('/movies', movieRouter);
+app.use('/genres', genreRouter);
 
 module.exports = app;
