@@ -10,7 +10,8 @@ module.exports = ( sequelize, type ) => {
     // asociations
     Genre.associate = function( models ) {
 
-        Genre.hasMany( models.movie,{as: 'movies'});
+        Genre.hasMany( models.Movie,{as: 'movies'});
+
     }
 
     return Genre;

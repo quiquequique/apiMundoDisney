@@ -2,7 +2,7 @@
 
 module.exports = ( sequelize, type ) => {
 
-    const Movie = sequelize.define( 'movie', {
+    const Movie = sequelize.define( 'Movie', {
 
         title: type.STRING,
         image: type.STRING,
@@ -17,7 +17,11 @@ module.exports = ( sequelize, type ) => {
             as:'genre',
             foreignKey: 'genreId'
         });
-    }
+        Movie.belongsToMany( models.Actor,{
+            through: models.ActorMovie,
+            as: 'actors'
+        });
+    };
 
     return Movie;
 };
