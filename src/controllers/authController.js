@@ -1,8 +1,8 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require('bcryptjs');
 const { validationResult } = require('express-validator');
-// const user  = require('../../db/models/user');
-const db = require('../../db/models/index')
+const db = require('../../db/models/index');
+const sgMail = require('@sendgrid/mail');
 
 require('dotenv').config();
 
@@ -82,6 +82,8 @@ const controller = {
 
                 if( newUser ){
 
+                    sendEmail( req.body.name, req.body.lastName, req.body.email );
+
                     return res.json({
 
                         meta:{
@@ -103,6 +105,28 @@ const controller = {
                 return res.status( 500 ).json( {error: `${error}`} );
 
             }
+        }
+        function sendEmail ( _name, _lastName, _email) {
+
+            // using Twilio SendGrid's v3 Node.js Library
+            // https://github.com/sendgrid/sendgrid-nodejs
+
+            sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+            const msg = {
+              to: `${_email}`, // Change to your recipient
+              from: 'eabramzon@gmail.com', // Change to your verified sender
+              subject: 'Sending with SendGrid is Fun',
+              text: 'bienvenido a la api',
+              html: `<strong>Hola ${_name} ${_lastName} bienvenido a mundo disney</strong>`,
+            }
+            sgMail
+              .send(msg)
+              .then(() => {
+                console.log('Email sent')
+              })
+              .catch((error) => {
+                console.error(error)
+                })
         }
     },
 

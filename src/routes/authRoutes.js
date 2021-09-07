@@ -11,7 +11,7 @@ router.post('/login',
 [
     check( 'email', 'incorrect email format' ).not().isEmpty().isEmail(),
 
-    check( 'password', 'incorrect password format' ).isLength( {min: 4} )
+    check( 'password', 'incorrect password format' ).not().isEmpty().isLength( {min: 4, max: 20} )
 ]
 , authController.login);
 

@@ -6,6 +6,11 @@ const db = require('../../db/models')
 
 const findOne = async ( req, res ) => {
 
+    if( Object.keys(req.body).length !== 0 ){
+
+        return res.status( 401 ).json( {meta:{status: '401', msg:'content in body unauthorized '}} );
+    };
+
     try{
 
         const genreId = req.params.id;

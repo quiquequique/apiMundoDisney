@@ -1,9 +1,18 @@
 const db = require( '../../db/models' );
+const { validationResult } = require('express-validator');
+
 
 
 const controller = {
 
     listActors: async ( req, res ) => {
+
+        console.log( req.body );
+
+        if( Object.keys(req.body).length !== 0 ){
+
+            return res.status( 401 ).json( {meta:{status: '401', msg:'content in body unauthorized '}} );
+        };
 
         if( req.query ){
 
@@ -115,6 +124,7 @@ const controller = {
                 res.json( {"Response":`tiene query idMovie: ${idMovie}`} );
 
             };
+
         };
 
         // list all characters
@@ -149,6 +159,11 @@ const controller = {
     },
 
     getOneActor: async ( req, res ) => {
+
+        if( Object.keys(req.body).length !== 0 ){
+
+            return res.status( 401 ).json( {meta:{status: '401', msg:'content in body unauthorized '}} );
+        };
 
         try{
 
@@ -186,7 +201,10 @@ const controller = {
                                             data:{character}
                                                 } );
 
-            }
+            }else{
+
+                res.status( 404 ).json( {meta:{status:'404', msg:'character not found'}})
+            };
 
         }catch(error){
 
@@ -196,6 +214,14 @@ const controller = {
     },
 
     createActor: async ( req, res ) => {
+
+        let errors = validationResult(req);
+
+        if(!errors.isEmpty()){
+
+            return res.status(422).json( {meta: {errors: errors.array()} } );
+
+        };
 
         try{
 
@@ -219,6 +245,14 @@ const controller = {
         }
     },
     updateActor: async ( req, res ) => {
+
+        let errors = validationResult(req);
+
+        if(!errors.isEmpty()){
+
+            return res.status(422).json( {meta: {errors: errors.array()} } );
+
+        };
 
         try{
 
@@ -249,6 +283,11 @@ const controller = {
     },
 
     deleteActor: async ( req, res ) => {
+
+        if( Object.keys(req.body).length !== 0 ){
+
+            return res.status( 401 ).json( {meta:{status: '401', msg:'content in body unauthorized '}} );
+        };
 
         try{
 

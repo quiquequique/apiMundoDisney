@@ -5,20 +5,21 @@ POST http://localhost:3000/auth/register
 Content-Type: application/json
 
 {
-    "name":"Rolo",
-    "lastName":"reg",
-    "email":"regi@gmail.com",
-    "password":"5577555"
+    "name":"Rod",
+    "lastName":"gadop",
+    "email":"bramzon@hotmail.com",
+    "password":"a0059"
 }
 
 ###
 // 2__ postea a ruta login y recibe el token
 POST http://localhost:3000/auth/login
 Content-Type: application/json
+// el user del ej existe en la db
 
 {
-    "email":"regi@gmail.com",
-    "password":"5577555"
+    "email":"bramzon@hotmail.com",
+    "password":"a0059"
 }
 
 
@@ -26,17 +27,20 @@ Content-Type: application/json
 // 3__  ruta a list de actores con el token recibido(devuelve imagen y nombre)
 GET http://localhost:3000/characters
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo3LCJuYW1lIjoiUm9sbyIsImxhc3ROYW1lIjoicmVnIiwiZW1haWwiOiJyZWdpQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJhJDEwJFAvZE03M0RXWkF3VVVWclkyUHlYUnVZZjU3ci5CWE9VbXVDL0w4TFB1RzRFN0tFc0I0RkVlIiwiY3JlYXRlZEF0IjoiMjAyMS0wOS0wN1QwMjowMzo1NC4wMDBaIiwidXBkYXRlZEF0IjoiMjAyMS0wOS0wN1QwMjowMzo1NC4wMDBaIn0sImlhdCI6MTYzMDk4MDI2NiwiZXhwIjoxNjMxODQ0MjY2fQ.1ez2pp5pgDIAiRKfJs1k2OxDkkKz5P8-0-T3d_D64Oc
+Authorization: Bearer
+// add token after "Bearer" respecting 1 empty space betwen
 
 ###
 // 4__ CRUD de characters (create, edite, delete)
 POST http://localhost:3000/characters
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjozLCJuYW1lIjoiRW5yaXF1ZSIsImxhc3ROYW1lIjoiQWJyYW16b24iLCJlbWFpbCI6ImVhYnJhbXpvbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCQuZmc1TkNkNjF3bVJTYVVmTFZGVFEudGtzUWg5NGdFVlBnWnkyTGtybzM5Mm0uL3pLVHljRyIsImNyZWF0ZWRBdCI6IjIwMjEtMDktMDNUMTc6NTk6NTAuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDktMDNUMTc6NTk6NTAuMDAwWiJ9LCJpYXQiOjE2MzA2OTIyNzEsImV4cCI6MTYzMTU1NjI3MX0.ujf1Bxbu7at9Cb9plaaJ7Keu5pIGegbu-9vvpa5PLcM
+Authorization: Bearer
+// add token after "Bearer" respecting 1 empty space betwen
+
 
 {
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Luca_Prodan.jpg/250px-Luca_Prodan.jpg",
-    "name": "Pepe Maso",
+    "name": "Pee Maso",
     "age": 22,
     "weight": 58,
     "history": "hiasdfgh esta   ksdjfgajksd fljk lsdjk fherqwerwer q werqwerqwer qwerqwerqwer q werqwer)"
@@ -46,72 +50,92 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjozL
 // update
 PUT http://localhost:3000/characters/2
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjozLCJuYW1lIjoiRW5yaXF1ZSIsImxhc3ROYW1lIjoiQWJyYW16b24iLCJlbWFpbCI6ImVhYnJhbXpvbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCQuZmc1TkNkNjF3bVJTYVVmTFZGVFEudGtzUWg5NGdFVlBnWnkyTGtybzM5Mm0uL3pLVHljRyIsImNyZWF0ZWRBdCI6IjIwMjEtMDktMDNUMTc6NTk6NTAuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDktMDNUMTc6NTk6NTAuMDAwWiJ9LCJpYXQiOjE2MzA2OTIyNzEsImV4cCI6MTYzMTU1NjI3MX0.ujf1Bxbu7at9Cb9plaaJ7Keu5pIGegbu-9vvpa5PLcM
+Authorization: Bearer
+// add token after "Bearer" respecting 1 empty space betwen
+
 
 {
     "image": "https://upload.wikimedia.org/wikipedia/commons/1/12/Florencia_de_la_V_%282012%29.jpg",
     "name": "Juan Perez updated2",
     "age": 45,
     "weight": 76,
-    "history": "historia 55 updated qwer qwerqwerwer q werqwerqwer qwerqwerqwer q werqwer)"
+    "history": "dfghklghsdfjksdfjklh"
 }
 
 ###
 // delete
-DELETE http://localhost:3000/characters/8
+DELETE http://localhost:3000/characters/7
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjozLCJuYW1lIjoiRW5yaXF1ZSIsImxhc3ROYW1lIjoiQWJyYW16b24iLCJlbWFpbCI6ImVhYnJhbXpvbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCQuZmc1TkNkNjF3bVJTYVVmTFZGVFEudGtzUWg5NGdFVlBnWnkyTGtybzM5Mm0uL3pLVHljRyIsImNyZWF0ZWRBdCI6IjIwMjEtMDktMDNUMTc6NTk6NTAuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDktMDNUMTc6NTk6NTAuMDAwWiJ9LCJpYXQiOjE2MzA2OTIyNzEsImV4cCI6MTYzMTU1NjI3MX0.ujf1Bxbu7at9Cb9plaaJ7Keu5pIGegbu-9vvpa5PLcM
+Authorization: Bearer
+// add token after "Bearer" respecting 1 empty space betwen
+
 
 ###
 // 5__ detalle personaje ( atributos + series relacionadas )
-GET http://localhost:3000/characters/5
+GET http://localhost:3000/characters/2
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjozLCJuYW1lIjoiRW5yaXF1ZSIsImxhc3ROYW1lIjoiQWJyYW16b24iLCJlbWFpbCI6ImVhYnJhbXpvbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCQuZmc1TkNkNjF3bVJTYVVmTFZGVFEudGtzUWg5NGdFVlBnWnkyTGtybzM5Mm0uL3pLVHljRyIsImNyZWF0ZWRBdCI6IjIwMjEtMDktMDNUMTc6NTk6NTAuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDktMDNUMTc6NTk6NTAuMDAwWiJ9LCJpYXQiOjE2MzA2OTIyNzEsImV4cCI6MTYzMTU1NjI3MX0.ujf1Bxbu7at9Cb9plaaJ7Keu5pIGegbu-9vvpa5PLcM
+Authorization: Bearer
+// add token after "Bearer" respecting 1 empty space betwen
+
 
 ###
 // 6__ busqueda de personaje (*edad / *nombre/ *pelicula)
 GET http://localhost:3000/characters?age=35
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjozLCJuYW1lIjoiRW5yaXF1ZSIsImxhc3ROYW1lIjoiQWJyYW16b24iLCJlbWFpbCI6ImVhYnJhbXpvbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCQuZmc1TkNkNjF3bVJTYVVmTFZGVFEudGtzUWg5NGdFVlBnWnkyTGtybzM5Mm0uL3pLVHljRyIsImNyZWF0ZWRBdCI6IjIwMjEtMDktMDNUMTc6NTk6NTAuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDktMDNUMTc6NTk6NTAuMDAwWiJ9LCJpYXQiOjE2MzA2OTIyNzEsImV4cCI6MTYzMTU1NjI3MX0.ujf1Bxbu7at9Cb9plaaJ7Keu5pIGegbu-9vvpa5PLcM
+Authorization: Bearer
+// add token after "Bearer" respecting 1 empty space betwen
+
 
 ###
 GET http://localhost:3000/characters?name=Pablo prodan
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjozLCJuYW1lIjoiRW5yaXF1ZSIsImxhc3ROYW1lIjoiQWJyYW16b24iLCJlbWFpbCI6ImVhYnJhbXpvbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCQuZmc1TkNkNjF3bVJTYVVmTFZGVFEudGtzUWg5NGdFVlBnWnkyTGtybzM5Mm0uL3pLVHljRyIsImNyZWF0ZWRBdCI6IjIwMjEtMDktMDNUMTc6NTk6NTAuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDktMDNUMTc6NTk6NTAuMDAwWiJ9LCJpYXQiOjE2MzA2OTIyNzEsImV4cCI6MTYzMTU1NjI3MX0.ujf1Bxbu7at9Cb9plaaJ7Keu5pIGegbu-9vvpa5PLcM
+Authorization: Bearer
+// add token after "Bearer" respecting 1 empty space betwen
+
 
 ###
 GET http://localhost:3000/characters?movies=3
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjozLCJuYW1lIjoiRW5yaXF1ZSIsImxhc3ROYW1lIjoiQWJyYW16b24iLCJlbWFpbCI6ImVhYnJhbXpvbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCQuZmc1TkNkNjF3bVJTYVVmTFZGVFEudGtzUWg5NGdFVlBnWnkyTGtybzM5Mm0uL3pLVHljRyIsImNyZWF0ZWRBdCI6IjIwMjEtMDktMDNUMTc6NTk6NTAuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDktMDNUMTc6NTk6NTAuMDAwWiJ9LCJpYXQiOjE2MzA2OTIyNzEsImV4cCI6MTYzMTU1NjI3MX0.ujf1Bxbu7at9Cb9plaaJ7Keu5pIGegbu-9vvpa5PLcM
+Authorization: Bearer
+// add token after "Bearer" respecting 1 empty space betwen
+
 
 
 ###
 // 7__ Listado de Películas Deberá mostrar solamente los campos imagen, título y fecha de creación.El endpoint deberá ser:● GET /movies
 GET http://localhost:3000/movies
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjozLCJuYW1lIjoiRW5yaXF1ZSIsImxhc3ROYW1lIjoiQWJyYW16b24iLCJlbWFpbCI6ImVhYnJhbXpvbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCQuZmc1TkNkNjF3bVJTYVVmTFZGVFEudGtzUWg5NGdFVlBnWnkyTGtybzM5Mm0uL3pLVHljRyIsImNyZWF0ZWRBdCI6IjIwMjEtMDktMDNUMTc6NTk6NTAuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDktMDNUMTc6NTk6NTAuMDAwWiJ9LCJpYXQiOjE2MzA2OTIyNzEsImV4cCI6MTYzMTU1NjI3MX0.ujf1Bxbu7at9Cb9plaaJ7Keu5pIGegbu-9vvpa5PLcM
+Authorization: Bearer
+// add token after "Bearer" respecting 1 empty space betwen
+
 
 ###
 // 8__ Detalle de Película / Serie con sus personajes
-GET http://localhost:3000/movies/5
+GET http://localhost:3000/movies/3
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiRW5yaXF1ZSIsImxhc3ROYW1lIjoiQWJyYW16b24iLCJlbWFpbCI6ImVhYnJhbXpvbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCR6eUtvRXh2aHhSaDFLcVhlakxEWEhlQ1NaU3p0T1hxWHpaM2xpcGNJREpWWjNGbkJMNVRadSIsImNyZWF0ZWRBdCI6IjIwMjEtMDktMDJUMjA6MjU6MDkuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDktMDJUMjA6MjU6MDkuMDAwWiJ9LCJpYXQiOjE2MzA2MTQzNTksImV4cCI6MTYzMTQ3ODM1OX0.lLoXhhxywkhVybnAEGRa3KSdOUal78G45UxH1kXiLow
+Authorization: Bearer
+// add token after "Bearer" respecting 1 empty space betwen
+
 
 ###
 // 9__ CRUD Movie
 // crear pelicula
 POST http://localhost:3000/movies
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiRW5yaXF1ZSIsImxhc3ROYW1lIjoiQWJyYW16b24iLCJlbWFpbCI6ImVhYnJhbXpvbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCR6eUtvRXh2aHhSaDFLcVhlakxEWEhlQ1NaU3p0T1hxWHpaM2xpcGNJREpWWjNGbkJMNVRadSIsImNyZWF0ZWRBdCI6IjIwMjEtMDktMDJUMjA6MjU6MDkuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDktMDJUMjA6MjU6MDkuMDAwWiJ9LCJpYXQiOjE2MzA2MTQzNTksImV4cCI6MTYzMTQ3ODM1OX0.lLoXhhxywkhVybnAEGRa3KSdOUal78G45UxH1kXiLow
+Authorization: Bearer
+// add token after "Bearer" respecting 1 empty space betwen
+
 
 {
     "genreId":"1",
-    "title":"NinjasIII",
+    "title":"NinjasIIIII",
     "image":"https://es.web.img3.acsta.net/pictures/16/06/27/12/51/126212.jpg",
-    "stars":"4"
+    "stars":"1"
 }
 
 ###
-PUT http://localhost:3000/movies/9
+PUT http://localhost:3000/movies/11
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiRW5yaXF1ZSIsImxhc3ROYW1lIjoiQWJyYW16b24iLCJlbWFpbCI6ImVhYnJhbXpvbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCR6eUtvRXh2aHhSaDFLcVhlakxEWEhlQ1NaU3p0T1hxWHpaM2xpcGNJREpWWjNGbkJMNVRadSIsImNyZWF0ZWRBdCI6IjIwMjEtMDktMDJUMjA6MjU6MDkuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDktMDJUMjA6MjU6MDkuMDAwWiJ9LCJpYXQiOjE2MzA2MTQzNTksImV4cCI6MTYzMTQ3ODM1OX0.lLoXhhxywkhVybnAEGRa3KSdOUal78G45UxH1kXiLow
+Authorization: Bearer
+// add token after "Bearer" respecting 1 empty space betwen
+
 
 {
     "genreId":"1",
@@ -121,38 +145,44 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxL
 }
 
 ###
-DELETE http://localhost:3000/movies/9
+DELETE http://localhost:3000/movies/11
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiRW5yaXF1ZSIsImxhc3ROYW1lIjoiQWJyYW16b24iLCJlbWFpbCI6ImVhYnJhbXpvbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCR6eUtvRXh2aHhSaDFLcVhlakxEWEhlQ1NaU3p0T1hxWHpaM2xpcGNJREpWWjNGbkJMNVRadSIsImNyZWF0ZWRBdCI6IjIwMjEtMDktMDJUMjA6MjU6MDkuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDktMDJUMjA6MjU6MDkuMDAwWiJ9LCJpYXQiOjE2MzA2MTQzNTksImV4cCI6MTYzMTQ3ODM1OX0.lLoXhhxywkhVybnAEGRa3KSdOUal78G45UxH1kXiLow
+Authorization: Bearer
+// add token after "Bearer" respecting 1 empty space betwen
+
 
 
 ###
-// 10__ busqueda pelis (*nombre / *idGenero / *order ASC | DSC )
+// 10__ busqueda pelis (*nombre / *idGenero / *order ASC | DESC )
 GET http://localhost:3000/movies?name=ouijaII
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiRW5yaXF1ZSIsImxhc3ROYW1lIjoiQWJyYW16b24iLCJlbWFpbCI6ImVhYnJhbXpvbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCR6eUtvRXh2aHhSaDFLcVhlakxEWEhlQ1NaU3p0T1hxWHpaM2xpcGNJREpWWjNGbkJMNVRadSIsImNyZWF0ZWRBdCI6IjIwMjEtMDktMDJUMjA6MjU6MDkuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDktMDJUMjA6MjU6MDkuMDAwWiJ9LCJpYXQiOjE2MzA2MTQzNTksImV4cCI6MTYzMTQ3ODM1OX0.lLoXhhxywkhVybnAEGRa3KSdOUal78G45UxH1kXiLow
+Authorization: Bearer
+// add token after "Bearer" respecting 1 empty space betwen
+
 
 ###
 GET http://localhost:3000/movies?genre=2
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiRW5yaXF1ZSIsImxhc3ROYW1lIjoiQWJyYW16b24iLCJlbWFpbCI6ImVhYnJhbXpvbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCR6eUtvRXh2aHhSaDFLcVhlakxEWEhlQ1NaU3p0T1hxWHpaM2xpcGNJREpWWjNGbkJMNVRadSIsImNyZWF0ZWRBdCI6IjIwMjEtMDktMDJUMjA6MjU6MDkuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDktMDJUMjA6MjU6MDkuMDAwWiJ9LCJpYXQiOjE2MzA2MTQzNTksImV4cCI6MTYzMTQ3ODM1OX0.lLoXhhxywkhVybnAEGRa3KSdOUal78G45UxH1kXiLow
+Authorization: Bearer
+// add token after "Bearer" respecting 1 empty space betwen
+
 
 ###
 GET http://localhost:3000/movies?order=desc
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiRW5yaXF1ZSIsImxhc3ROYW1lIjoiQWJyYW16b24iLCJlbWFpbCI6ImVhYnJhbXpvbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCR6eUtvRXh2aHhSaDFLcVhlakxEWEhlQ1NaU3p0T1hxWHpaM2xpcGNJREpWWjNGbkJMNVRadSIsImNyZWF0ZWRBdCI6IjIwMjEtMDktMDJUMjA6MjU6MDkuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDktMDJUMjA6MjU6MDkuMDAwWiJ9LCJpYXQiOjE2MzA2MTQzNTksImV4cCI6MTYzMTQ3ODM1OX0.lLoXhhxywkhVybnAEGRa3KSdOUal78G45UxH1kXiLow
+Authorization: Bearer
+// add token after "Bearer" respecting 1 empty space betwen
 
 
-
-
-// 11__ envio emails!!
-
+// 11__ envio de emails funcionando en authController
 
 ###
-// Detalle de genero / con pelis asociadas
+// Detalle de genero / con pelis asociadas para probar la relacion desde el otro lado 
 GET http://localhost:3000/genres/2
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiRW5yaXF1ZSIsImxhc3ROYW1lIjoiQWJyYW16b24iLCJlbWFpbCI6ImVhYnJhbXpvbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCR6eUtvRXh2aHhSaDFLcVhlakxEWEhlQ1NaU3p0T1hxWHpaM2xpcGNJREpWWjNGbkJMNVRadSIsImNyZWF0ZWRBdCI6IjIwMjEtMDktMDJUMjA6MjU6MDkuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDktMDJUMjA6MjU6MDkuMDAwWiJ9LCJpYXQiOjE2MzA2MTQzNTksImV4cCI6MTYzMTQ3ODM1OX0.lLoXhhxywkhVybnAEGRa3KSdOUal78G45UxH1kXiLow
+Authorization: Bearer
+// add token after "Bearer" respecting 1 empty space betwen
+
 
 
 

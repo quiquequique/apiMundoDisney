@@ -1,9 +1,16 @@
-//const { movie, genre } = require( '../../db/models')
+
 const db = require ('../../db/models')
+const { validationResult } = require('express-validator');
+
 
 const controller = {
 
     list: async ( req, res ) => {
+
+        if( Object.keys(req.body).length !== 0 ){
+
+            return res.status( 401 ).json( {meta:{status: '401', msg:'content in body unauthorized '}} );
+        };
 
         if( req.query ){
 
@@ -17,7 +24,7 @@ const controller = {
 
                     const searchedMovie = await db.Movie.findAll( {where:{title:`${titleQuery}`}} );
 
-                    if( searchedMovie.length !== 0 ){ 
+                    if( searchedMovie.length !== 0 ){
 
                         return res.status( 200 ).json( {meta:
                             {
@@ -30,10 +37,10 @@ const controller = {
                             data: {searchedMovie}
                         });
 
-                        }else{
+                    }else{
 
-                            res.status(404).json( {meta:{msg: 'movie not found'}} );
-                        }
+                        res.status(404).json( {meta:{msg: 'movie not found'}} );
+                    }
 
 
                 }catch( error ){
@@ -104,10 +111,10 @@ const controller = {
                             data: {searchedMovie}
                         });
 
-                        }else{
+                    }else{
 
-                            res.status(404).json( {meta:{msg: 'movie not found'}} );
-                        }
+                        res.status(404).json( {meta:{msg: 'movie not found'}} );
+                    }
 
 
                 }catch( error ){
@@ -163,6 +170,11 @@ const controller = {
 
     getOne: async ( req, res ) => {
 
+        if( Object.keys(req.body).length !== 0 ){
+
+            return res.status( 401 ).json( {meta:{status: '401', msg:'content in body unauthorized '}} );
+        };
+
         try{
 
             const movieId = req.params.id;
@@ -175,7 +187,7 @@ const controller = {
 
             }
 
-            return res.status( 200 ).json(returnedOne);
+            return res.status( 200 ).json({meta:{status: "200"}, data:{returnedOne}});
 
         }catch(error){
 
@@ -187,6 +199,14 @@ const controller = {
     },
 
     createMovie: async ( req, res ) => {
+
+        let errors = validationResult(req);
+
+        if(!errors.isEmpty()){
+
+            return res.status(422).json( {meta: {errors: errors.array()} } );
+
+        };
 
         try{
 
@@ -214,6 +234,14 @@ const controller = {
     },
     updateMovie: async ( req, res ) => {
 
+        let errors = validationResult(req);
+
+        if(!errors.isEmpty()){
+
+            return res.status(422).json( {meta: {errors: errors.array()} } );
+
+        };
+
         try{
 
             const movieToUpdate = req.body;
@@ -232,7 +260,12 @@ const controller = {
                 })
             }else{
 
-                return error;
+                return res.status( 404 ).json({
+                    meta:{
+                        status: 404,
+                        msg: `no se encontro la pelicula`
+                    }
+                })
             }
 
         }catch{
@@ -242,6 +275,11 @@ const controller = {
         }
     },
     deleteMovie: async ( req, res ) => {
+
+        if( Object.keys(req.body).length !== 0 ){
+
+            return res.status( 401 ).json( {meta:{status: '401', msg:'content in body unauthorized '}} );
+        };
 
         try{
 
@@ -255,6 +293,14 @@ const controller = {
                     meta:{
                         status: 200,
                         msg: `se borro la peli: ${movieToDelete} correctamente`
+                    }
+                })
+            }else{
+
+                return res.status( 404 ).json({
+                    meta:{
+                        status: 404,
+                        msg: 'movie not found'
                     }
                 })
             }
