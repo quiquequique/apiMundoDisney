@@ -15,7 +15,7 @@ const controller = {
 
         if(!errors.isEmpty()){
 
-            return res.status(422).json({errors: errors.array()});
+            return res.status(422).json( {meta: {errors: errors.array()} } );
         }
 
         try{
@@ -34,13 +34,16 @@ const controller = {
 
                     const token = jwt.sign( {user}, `${jwtKey}`, { expiresIn: '240h'} );
 
-                    res.status(200).json( {"token": token} );
+                    res.status(200).json( {meta:{status: '200'}, data:{"token": token}} );
 
+                }else{
+
+                    res.status(401).json( {meta:{error: `user or password are incorrect`, status: '401'}} );
                 }
 
             }else{
 
-                res.status(401).json( {error: `user or password are incorrect`} );
+                res.status(401).json( {meta:{error: `user or password are incorrect`, status: '401'}} );
             }
 
         }
@@ -57,36 +60,49 @@ const controller = {
 
         if(!errors.isEmpty()){
 
-            return res.status(422).json({errors: errors.array()});
+            return res.status(422).json( {meta: {errors: errors.array()}} );
         }
 
-        try{
+        const userExist = await db.user.findOne( { where:{ email: req.body.email } } );
 
-            const passToEncript = req.body.password;
+        if( userExist ){
 
-            req.body.password = bcrypt.hashSync( passToEncript, 10 );
+            res.status(409).json( {meta: {msg: " user allready exist "}} )
+        }else{
 
-            // console.log( req.body );
+            try{
 
-            const newUser = await db.user.create( req.body );
+                const passToEncript = req.body.password;
 
-            if( newUser ){
+                req.body.password = bcrypt.hashSync( passToEncript, 10 );
 
-                return res.json({
-                    status: "ok",
-                    message: `se creo el user ${req.body.name} correctamente`
-                })
-            }else{
-    
-                return error;
+                // console.log( req.body );
+
+                const newUser = await db.user.create( req.body );
+
+                if( newUser ){
+
+                    return res.json({
+
+                        meta:{
+
+                            status: "ok",
+
+                            message: `se creo el user ${req.body.name} correctamente`
+                        }
+                    })
+                }else{
+
+                    return error;
+                }
+
+                return res.status( 200 ).json({msg:'user created'});
+
+            }catch( error ){
+
+                return res.status( 500 ).json( {error: `${error}`} );
+
             }
-
-            return res.status( 200 ).json({msg:'user created'});
-
-        }catch( error ){
-
-            return res.status( 500 ).json( {error: `${error}`} );
-
         }
     },
 

@@ -11,18 +11,73 @@ const controller = {
 
             if( req.query.name ){
 
-                const nameQuery = req.query.name;
+                const titleQuery = ( req.query.name ).trim();
 
-                res.json( {"Response":`tiene query name: ${nameQuery}`} );
+                try{
+
+                    const searchedMovie = await db.Movie.findAll( {where:{title:`${titleQuery}`}} );
+
+                    if( searchedMovie.length !== 0 ){ 
+
+                        return res.status( 200 ).json( {meta:
+                            {
+
+                                status: '200',
+                                link:'/movies',
+                                count: searchedMovie.length
+
+                            },
+                            data: {searchedMovie}
+                        });
+
+                        }else{
+
+                            res.status(404).json( {meta:{msg: 'movie not found'}} );
+                        }
+
+
+                }catch( error ){
+
+                    return res.status(500).json( {meta:{error: error}} );
+
+                };
+
             };
 
             // search movies by genre
 
             if( req.query.genre ){
 
-             const genreQuery = req.query.genre;
+             const genreQuery = ( req.query.genre ).trim();
 
-             res.json( {"Response":`tiene query genre: ${genreQuery}`} );
+                try{
+
+                    const searchedMovie = await db.Movie.findAll( {where:{genreId:`${genreQuery}`}} );
+
+                    if( searchedMovie.length !== 0 ){ 
+
+                        return res.status( 200 ).json( {meta:
+                            {
+
+                                status: '200',
+                                link:'/movies',
+                                count: searchedMovie.length
+
+                            },
+                            data: {searchedMovie}
+                        });
+
+                        }else{
+
+                            res.status(404).json( {meta:{msg: 'movie not found'}} );
+                        }
+
+
+                }catch( error ){
+
+                    return res.status(500).json( {meta:{error: error}} );
+
+                };
 
             };
 
@@ -30,7 +85,36 @@ const controller = {
 
             if( req.query.order ){
 
-                const orderOfList = req.query.order;
+                const orderOfList = (req.query.order).trim();
+
+                try{
+
+                    const searchedMovie = await db.Movie.findAll( {order:[['createdAt', `${orderOfList}`]]} );
+
+                    if( searchedMovie.length !== 0 ){ 
+
+                        return res.status( 200 ).json( {meta:
+                            {
+
+                                status: '200',
+                                link:'/movies',
+                                count: searchedMovie.length
+
+                            },
+                            data: {searchedMovie}
+                        });
+
+                        }else{
+
+                            res.status(404).json( {meta:{msg: 'movie not found'}} );
+                        }
+
+
+                }catch( error ){
+
+                    return res.status(500).json( {meta:{error: error}} );
+
+                };
 
                 res.json( {"Response":`tiene query order: ${orderOfList}`} );
 
@@ -39,7 +123,7 @@ const controller = {
         // list all movies
         try{
 
-            const returnedMovies = await db.movie.findAll();
+            const returnedMovies = await db.Movie.findAll();
 
             if( returnedMovies ){
 
@@ -83,7 +167,7 @@ const controller = {
 
             const movieId = req.params.id;
 
-            const returnedOne = await db.movie.findByPk ( movieId, {include:["genre"]});
+            const returnedOne = await db.Movie.findByPk ( movieId, {include:["actors"]});
 
             if( !returnedOne ){
 
@@ -102,7 +186,7 @@ const controller = {
 
     },
 
-    create: async ( req, res ) => {
+    createMovie: async ( req, res ) => {
 
         try{
 
@@ -110,7 +194,7 @@ const controller = {
 
             // console.log( movieToCreate );
 
-            const createdMovie = await db.movie.create( movieToCreate );
+            const createdMovie = await db.Movie.create( movieToCreate );
 
             if( createdMovie ){
 
@@ -127,6 +211,59 @@ const controller = {
 
 
 
+    },
+    updateMovie: async ( req, res ) => {
+
+        try{
+
+            const movieToUpdate = req.body;
+
+            const movieId = req.params.id;
+
+            const updatedMovie = await db.Movie.update( movieToUpdate, {where: {id: movieId}} );
+
+            if( updatedMovie == 1 ){
+
+                return res.status( 200 ).json({
+                    meta:{
+                        status: 200,
+                        msg: `se actualizo la pelicula: ${req.body.title} correctamente`
+                    }
+                })
+            }else{
+
+                return error;
+            }
+
+        }catch{
+
+            return res.status( 500 ).json({meta:{msg:'server error'}});
+
+        }
+    },
+    deleteMovie: async ( req, res ) => {
+
+        try{
+
+            const movieToDelete = req.params.id;
+
+            const deletedMovie = await db.Movie.destroy( {where: {id: movieToDelete}} );
+
+            if( deletedMovie ){
+
+                return res.status( 200 ).json({
+                    meta:{
+                        status: 200,
+                        msg: `se borro la peli: ${movieToDelete} correctamente`
+                    }
+                })
+            }
+
+        }catch(error){
+
+            return res.status( 500 ).json({meta:{msg:'server error', error:`${error}` }});
+
+        }
     }
 
 

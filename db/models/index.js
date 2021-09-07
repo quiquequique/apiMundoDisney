@@ -19,13 +19,16 @@ try{
 
   sequelize.authenticate().then( () => {
 
-      console.log('db connected ');
+      console.log('db connected ')
 
-  })
+  }).catch( (error) => {
+    console.log(`*************************************************************************************************************************************************`);
+    console.log(`db ERROR!!!, check your db connection and restart the server: ///   ${error}`);
+    console.log(`*************************************************************************************************************************************************`);})
 
 }catch(error){
 
-  console.error( 'db connection fail: ', error );
+    console.error( error );
 }
 
 fs

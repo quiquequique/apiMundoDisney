@@ -9,7 +9,10 @@ module.exports = (sequelize, type) => {
         age: type.INTEGER,
         weight: type.INTEGER,
         history: type.STRING(510)
-    },{}
+    },
+    {
+        timestamps: false
+    }
     );
     Actor.associate = function (models) {
 

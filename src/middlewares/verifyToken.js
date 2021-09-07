@@ -14,9 +14,9 @@ module.exports =( req, res, next ) => {
 
         const token = bearer[1];
 
-        const salt = process.env.JWT_KEY;
+        const key = process.env.JWT_KEY;
 
-        jwt.verify( token, `${salt}`, ( error, data ) => {
+        jwt.verify( token, `${key}`, ( error, data ) => {
 
             if( !error ){
 

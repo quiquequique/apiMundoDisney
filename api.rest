@@ -1,14 +1,14 @@
 
 ###
-// 1__ registra usuario
+// 2__ registra usuario
 POST http://localhost:3000/auth/register
 Content-Type: application/json
 
 {
-    "name":"Enrique",
-    "lastName":"Abramzon",
-    "email":"eabramzon@gmail.com",
-    "password":"1234"
+    "name":"Rolo",
+    "lastName":"reg",
+    "email":"regi@gmail.com",
+    "password":"5577555"
 }
 
 ###
@@ -17,29 +17,70 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-    "email":"eabramzon@gmail.com",
-    "password":"1234"
+    "email":"regi@gmail.com",
+    "password":"5577555"
 }
 
 
 ###
-// ruta a list de actores con el token recibido
+// 3__  ruta a list de actores con el token recibido(devuelve imagen y nombre)
 GET http://localhost:3000/characters
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjo3LCJuYW1lIjoiUm9sbyIsImxhc3ROYW1lIjoicmVnIiwiZW1haWwiOiJyZWdpQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJhJDEwJFAvZE03M0RXWkF3VVVWclkyUHlYUnVZZjU3ci5CWE9VbXVDL0w4TFB1RzRFN0tFc0I0RkVlIiwiY3JlYXRlZEF0IjoiMjAyMS0wOS0wN1QwMjowMzo1NC4wMDBaIiwidXBkYXRlZEF0IjoiMjAyMS0wOS0wN1QwMjowMzo1NC4wMDBaIn0sImlhdCI6MTYzMDk4MDI2NiwiZXhwIjoxNjMxODQ0MjY2fQ.1ez2pp5pgDIAiRKfJs1k2OxDkkKz5P8-0-T3d_D64Oc
+
+###
+// 4__ CRUD de characters (create, edite, delete)
+POST http://localhost:3000/characters
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjozLCJuYW1lIjoiRW5yaXF1ZSIsImxhc3ROYW1lIjoiQWJyYW16b24iLCJlbWFpbCI6ImVhYnJhbXpvbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCQuZmc1TkNkNjF3bVJTYVVmTFZGVFEudGtzUWg5NGdFVlBnWnkyTGtybzM5Mm0uL3pLVHljRyIsImNyZWF0ZWRBdCI6IjIwMjEtMDktMDNUMTc6NTk6NTAuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDktMDNUMTc6NTk6NTAuMDAwWiJ9LCJpYXQiOjE2MzA2OTIyNzEsImV4cCI6MTYzMTU1NjI3MX0.ujf1Bxbu7at9Cb9plaaJ7Keu5pIGegbu-9vvpa5PLcM
+
+{
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Luca_Prodan.jpg/250px-Luca_Prodan.jpg",
+    "name": "Pepe Maso",
+    "age": 22,
+    "weight": 58,
+    "history": "hiasdfgh esta   ksdjfgajksd fljk lsdjk fherqwerwer q werqwerqwer qwerqwerqwer q werqwer)"
+}
+
+###
+// update
+PUT http://localhost:3000/characters/2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjozLCJuYW1lIjoiRW5yaXF1ZSIsImxhc3ROYW1lIjoiQWJyYW16b24iLCJlbWFpbCI6ImVhYnJhbXpvbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCQuZmc1TkNkNjF3bVJTYVVmTFZGVFEudGtzUWg5NGdFVlBnWnkyTGtybzM5Mm0uL3pLVHljRyIsImNyZWF0ZWRBdCI6IjIwMjEtMDktMDNUMTc6NTk6NTAuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDktMDNUMTc6NTk6NTAuMDAwWiJ9LCJpYXQiOjE2MzA2OTIyNzEsImV4cCI6MTYzMTU1NjI3MX0.ujf1Bxbu7at9Cb9plaaJ7Keu5pIGegbu-9vvpa5PLcM
+
+{
+    "image": "https://upload.wikimedia.org/wikipedia/commons/1/12/Florencia_de_la_V_%282012%29.jpg",
+    "name": "Juan Perez updated2",
+    "age": 45,
+    "weight": 76,
+    "history": "historia 55 updated qwer qwerqwerwer q werqwerqwer qwerqwerqwer q werqwer)"
+}
+
+###
+// delete
+DELETE http://localhost:3000/characters/8
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjozLCJuYW1lIjoiRW5yaXF1ZSIsImxhc3ROYW1lIjoiQWJyYW16b24iLCJlbWFpbCI6ImVhYnJhbXpvbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCQuZmc1TkNkNjF3bVJTYVVmTFZGVFEudGtzUWg5NGdFVlBnWnkyTGtybzM5Mm0uL3pLVHljRyIsImNyZWF0ZWRBdCI6IjIwMjEtMDktMDNUMTc6NTk6NTAuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDktMDNUMTc6NTk6NTAuMDAwWiJ9LCJpYXQiOjE2MzA2OTIyNzEsImV4cCI6MTYzMTU1NjI3MX0.ujf1Bxbu7at9Cb9plaaJ7Keu5pIGegbu-9vvpa5PLcM
 
 ###
-// crear pelicula
-POST http://localhost:3000/movies/create
+// 5__ detalle personaje ( atributos + series relacionadas )
+GET http://localhost:3000/characters/5
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiRW5yaXF1ZSIsImxhc3ROYW1lIjoiQWJyYW16b24iLCJlbWFpbCI6ImVhYnJhbXpvbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCR6eUtvRXh2aHhSaDFLcVhlakxEWEhlQ1NaU3p0T1hxWHpaM2xpcGNJREpWWjNGbkJMNVRadSIsImNyZWF0ZWRBdCI6IjIwMjEtMDktMDJUMjA6MjU6MDkuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDktMDJUMjA6MjU6MDkuMDAwWiJ9LCJpYXQiOjE2MzA2MTQzNTksImV4cCI6MTYzMTQ3ODM1OX0.lLoXhhxywkhVybnAEGRa3KSdOUal78G45UxH1kXiLow
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjozLCJuYW1lIjoiRW5yaXF1ZSIsImxhc3ROYW1lIjoiQWJyYW16b24iLCJlbWFpbCI6ImVhYnJhbXpvbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCQuZmc1TkNkNjF3bVJTYVVmTFZGVFEudGtzUWg5NGdFVlBnWnkyTGtybzM5Mm0uL3pLVHljRyIsImNyZWF0ZWRBdCI6IjIwMjEtMDktMDNUMTc6NTk6NTAuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDktMDNUMTc6NTk6NTAuMDAwWiJ9LCJpYXQiOjE2MzA2OTIyNzEsImV4cCI6MTYzMTU1NjI3MX0.ujf1Bxbu7at9Cb9plaaJ7Keu5pIGegbu-9vvpa5PLcM
 
-{
-    "genreId":"2",
-    "title":"OuijaIII",
-    "image":"https://es.web.img3.acsta.net/pictures/16/06/27/12/51/126212.jpg",
-    "stars":"1"
-}
+###
+// 6__ busqueda de personaje (*edad / *nombre/ *pelicula)
+GET http://localhost:3000/characters?age=35
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjozLCJuYW1lIjoiRW5yaXF1ZSIsImxhc3ROYW1lIjoiQWJyYW16b24iLCJlbWFpbCI6ImVhYnJhbXpvbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCQuZmc1TkNkNjF3bVJTYVVmTFZGVFEudGtzUWg5NGdFVlBnWnkyTGtybzM5Mm0uL3pLVHljRyIsImNyZWF0ZWRBdCI6IjIwMjEtMDktMDNUMTc6NTk6NTAuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDktMDNUMTc6NTk6NTAuMDAwWiJ9LCJpYXQiOjE2MzA2OTIyNzEsImV4cCI6MTYzMTU1NjI3MX0.ujf1Bxbu7at9Cb9plaaJ7Keu5pIGegbu-9vvpa5PLcM
+
+###
+GET http://localhost:3000/characters?name=Pablo prodan
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjozLCJuYW1lIjoiRW5yaXF1ZSIsImxhc3ROYW1lIjoiQWJyYW16b24iLCJlbWFpbCI6ImVhYnJhbXpvbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCQuZmc1TkNkNjF3bVJTYVVmTFZGVFEudGtzUWg5NGdFVlBnWnkyTGtybzM5Mm0uL3pLVHljRyIsImNyZWF0ZWRBdCI6IjIwMjEtMDktMDNUMTc6NTk6NTAuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDktMDNUMTc6NTk6NTAuMDAwWiJ9LCJpYXQiOjE2MzA2OTIyNzEsImV4cCI6MTYzMTU1NjI3MX0.ujf1Bxbu7at9Cb9plaaJ7Keu5pIGegbu-9vvpa5PLcM
+
+###
+GET http://localhost:3000/characters?movies=3
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjozLCJuYW1lIjoiRW5yaXF1ZSIsImxhc3ROYW1lIjoiQWJyYW16b24iLCJlbWFpbCI6ImVhYnJhbXpvbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCQuZmc1TkNkNjF3bVJTYVVmTFZGVFEudGtzUWg5NGdFVlBnWnkyTGtybzM5Mm0uL3pLVHljRyIsImNyZWF0ZWRBdCI6IjIwMjEtMDktMDNUMTc6NTk6NTAuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDktMDNUMTc6NTk6NTAuMDAwWiJ9LCJpYXQiOjE2MzA2OTIyNzEsImV4cCI6MTYzMTU1NjI3MX0.ujf1Bxbu7at9Cb9plaaJ7Keu5pIGegbu-9vvpa5PLcM
+
 
 ###
 // 7__ Listado de Películas Deberá mostrar solamente los campos imagen, título y fecha de creación.El endpoint deberá ser:● GET /movies
@@ -53,9 +94,66 @@ GET http://localhost:3000/movies/5
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiRW5yaXF1ZSIsImxhc3ROYW1lIjoiQWJyYW16b24iLCJlbWFpbCI6ImVhYnJhbXpvbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCR6eUtvRXh2aHhSaDFLcVhlakxEWEhlQ1NaU3p0T1hxWHpaM2xpcGNJREpWWjNGbkJMNVRadSIsImNyZWF0ZWRBdCI6IjIwMjEtMDktMDJUMjA6MjU6MDkuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDktMDJUMjA6MjU6MDkuMDAwWiJ9LCJpYXQiOjE2MzA2MTQzNTksImV4cCI6MTYzMTQ3ODM1OX0.lLoXhhxywkhVybnAEGRa3KSdOUal78G45UxH1kXiLow
 
+###
+// 9__ CRUD Movie
+// crear pelicula
+POST http://localhost:3000/movies
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiRW5yaXF1ZSIsImxhc3ROYW1lIjoiQWJyYW16b24iLCJlbWFpbCI6ImVhYnJhbXpvbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCR6eUtvRXh2aHhSaDFLcVhlakxEWEhlQ1NaU3p0T1hxWHpaM2xpcGNJREpWWjNGbkJMNVRadSIsImNyZWF0ZWRBdCI6IjIwMjEtMDktMDJUMjA6MjU6MDkuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDktMDJUMjA6MjU6MDkuMDAwWiJ9LCJpYXQiOjE2MzA2MTQzNTksImV4cCI6MTYzMTQ3ODM1OX0.lLoXhhxywkhVybnAEGRa3KSdOUal78G45UxH1kXiLow
+
+{
+    "genreId":"1",
+    "title":"NinjasIII",
+    "image":"https://es.web.img3.acsta.net/pictures/16/06/27/12/51/126212.jpg",
+    "stars":"4"
+}
 
 ###
-// 8__ Detalle de genero / con pelis asociadas
+PUT http://localhost:3000/movies/9
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiRW5yaXF1ZSIsImxhc3ROYW1lIjoiQWJyYW16b24iLCJlbWFpbCI6ImVhYnJhbXpvbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCR6eUtvRXh2aHhSaDFLcVhlakxEWEhlQ1NaU3p0T1hxWHpaM2xpcGNJREpWWjNGbkJMNVRadSIsImNyZWF0ZWRBdCI6IjIwMjEtMDktMDJUMjA6MjU6MDkuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDktMDJUMjA6MjU6MDkuMDAwWiJ9LCJpYXQiOjE2MzA2MTQzNTksImV4cCI6MTYzMTQ3ODM1OX0.lLoXhhxywkhVybnAEGRa3KSdOUal78G45UxH1kXiLow
+
+{
+    "genreId":"1",
+    "title":"Ninjas Muertos",
+    "image":"https://es.web.img3.acsta.net/pictures/16/06/27/12/51/126212.jpg",
+    "stars":"2"
+}
+
+###
+DELETE http://localhost:3000/movies/9
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiRW5yaXF1ZSIsImxhc3ROYW1lIjoiQWJyYW16b24iLCJlbWFpbCI6ImVhYnJhbXpvbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCR6eUtvRXh2aHhSaDFLcVhlakxEWEhlQ1NaU3p0T1hxWHpaM2xpcGNJREpWWjNGbkJMNVRadSIsImNyZWF0ZWRBdCI6IjIwMjEtMDktMDJUMjA6MjU6MDkuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDktMDJUMjA6MjU6MDkuMDAwWiJ9LCJpYXQiOjE2MzA2MTQzNTksImV4cCI6MTYzMTQ3ODM1OX0.lLoXhhxywkhVybnAEGRa3KSdOUal78G45UxH1kXiLow
+
+
+###
+// 10__ busqueda pelis (*nombre / *idGenero / *order ASC | DSC )
+GET http://localhost:3000/movies?name=ouijaII
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiRW5yaXF1ZSIsImxhc3ROYW1lIjoiQWJyYW16b24iLCJlbWFpbCI6ImVhYnJhbXpvbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCR6eUtvRXh2aHhSaDFLcVhlakxEWEhlQ1NaU3p0T1hxWHpaM2xpcGNJREpWWjNGbkJMNVRadSIsImNyZWF0ZWRBdCI6IjIwMjEtMDktMDJUMjA6MjU6MDkuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDktMDJUMjA6MjU6MDkuMDAwWiJ9LCJpYXQiOjE2MzA2MTQzNTksImV4cCI6MTYzMTQ3ODM1OX0.lLoXhhxywkhVybnAEGRa3KSdOUal78G45UxH1kXiLow
+
+###
+GET http://localhost:3000/movies?genre=2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiRW5yaXF1ZSIsImxhc3ROYW1lIjoiQWJyYW16b24iLCJlbWFpbCI6ImVhYnJhbXpvbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCR6eUtvRXh2aHhSaDFLcVhlakxEWEhlQ1NaU3p0T1hxWHpaM2xpcGNJREpWWjNGbkJMNVRadSIsImNyZWF0ZWRBdCI6IjIwMjEtMDktMDJUMjA6MjU6MDkuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDktMDJUMjA6MjU6MDkuMDAwWiJ9LCJpYXQiOjE2MzA2MTQzNTksImV4cCI6MTYzMTQ3ODM1OX0.lLoXhhxywkhVybnAEGRa3KSdOUal78G45UxH1kXiLow
+
+###
+GET http://localhost:3000/movies?order=desc
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiRW5yaXF1ZSIsImxhc3ROYW1lIjoiQWJyYW16b24iLCJlbWFpbCI6ImVhYnJhbXpvbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCR6eUtvRXh2aHhSaDFLcVhlakxEWEhlQ1NaU3p0T1hxWHpaM2xpcGNJREpWWjNGbkJMNVRadSIsImNyZWF0ZWRBdCI6IjIwMjEtMDktMDJUMjA6MjU6MDkuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDktMDJUMjA6MjU6MDkuMDAwWiJ9LCJpYXQiOjE2MzA2MTQzNTksImV4cCI6MTYzMTQ3ODM1OX0.lLoXhhxywkhVybnAEGRa3KSdOUal78G45UxH1kXiLow
+
+
+
+
+// 11__ envio emails!!
+
+
+###
+// Detalle de genero / con pelis asociadas
 GET http://localhost:3000/genres/2
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJuYW1lIjoiRW5yaXF1ZSIsImxhc3ROYW1lIjoiQWJyYW16b24iLCJlbWFpbCI6ImVhYnJhbXpvbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCR6eUtvRXh2aHhSaDFLcVhlakxEWEhlQ1NaU3p0T1hxWHpaM2xpcGNJREpWWjNGbkJMNVRadSIsImNyZWF0ZWRBdCI6IjIwMjEtMDktMDJUMjA6MjU6MDkuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDktMDJUMjA6MjU6MDkuMDAwWiJ9LCJpYXQiOjE2MzA2MTQzNTksImV4cCI6MTYzMTQ3ODM1OX0.lLoXhhxywkhVybnAEGRa3KSdOUal78G45UxH1kXiLow
+
+
+
+
